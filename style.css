@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+
+
+html {
+    margin: 0;
+    background: linear-gradient(to right, #f2984ace, #f2c84cd2);
+    font-family: 'Dancing Script', cursive;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 50px;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 5rem;
+}
+
+.taches{
+    display: block;
+    padding-top: 30px;
+}
+
+.todos {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.todo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.todo > *:not(:last-child) {
+    justify-content: space-between;
+    margin-right: 50px;
+    font-size: 3em;
+}
+.todo input:checked + p {
+    text-decoration: line-through;
+}
+
+#ajouterButton, #tache {
+    font-size: 1.2rem;
+}
+#ajouterButton {
+    font-family: 'Dancing Script', cursive;
+}
