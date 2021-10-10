@@ -13,7 +13,7 @@ html {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 50px;
+    padding-top: 10px;
 }
 
 h1 {
@@ -23,7 +23,6 @@ h1 {
 
 .taches{
     display: block;
-    
 }
 
 .todos {
@@ -38,6 +37,7 @@ h1 {
     display: flex;
     flex-direction: row;
     align-items: center;
+    
 }
 
 .todo > *:not(:last-child) {

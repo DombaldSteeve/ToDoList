@@ -16,9 +16,6 @@ if ("localStorage" in window && todosStorage && todosStorage.length) {
     }
 }
 
-
-
-
 function createTodo (todo) {
 
     // CONFIGURATION
@@ -48,14 +45,7 @@ function createTodo (todo) {
         .appendChild(toDoTask);
 
 
-        closedTask.addEventListener('click', function() {
-            if (!checkBox.checked) {
-                confirm("Tâche non accomplie, SUPPRIMER ?")
-                toDoTask.remove();
-            } else {
-                toDoTask.remove();
-            }  
-        })
+        closedTask.addEventListener('click', () => updateTodos(todo, toDoTask));
 
         checkBox.addEventListener('change', updateTodoState.bind({},todo));
 }
@@ -80,7 +70,10 @@ const ajouterTask = document.getElementById("ajouterButton")
 ajouterTask.addEventListener('click', function () {
     const maTache = tacheAFaire.value;
     if (maTache.length >= 4 ) {
-        toDo(maTache);
+        const todo = new Todo(maTache);
+        createTodo(todo);
+        todos.push(todo);
+        localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
         tacheAFaire.value = "";
         tacheAFaire.focus();
     }
