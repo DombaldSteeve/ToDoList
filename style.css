@@ -23,7 +23,7 @@ h1 {
 
 .taches{
     display: block;
-    padding-top: 30px;
+    
 }
 
 .todos {
@@ -31,7 +31,7 @@ h1 {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 50px;
+    
 }
 
 .todo {
@@ -43,7 +43,7 @@ h1 {
 .todo > *:not(:last-child) {
     justify-content: space-between;
     margin-right: 50px;
-    font-size: 3em;
+    font-size: 1.5em;
 }
 .todo input:checked + p {
     text-decoration: line-through;

@@ -1,14 +1,36 @@
-function toDo (txt) {
+const TODOS_KEY = "todos"
+const todosStorage = localStorage.getItem(TODOS_KEY);
+let todos = [];
+
+class Todo {
+    constructor (txt) {
+        this.txt = txt;
+        this.done = false;
+    }
+}
+
+if ("localStorage" in window && todosStorage && todosStorage.length) {
+    todos = JSON.parse(todosStorage);
+    for (let todo of todos) {
+        createTodo(todo);
+    }
+}
+
+
+
+
+function createTodo (todo) {
 
     // CONFIGURATION
-    const toDoTask = document.createElement('div')
-        toDoTask.className = ('todo')
+    const toDoTask = document.createElement('div');
+        toDoTask.className = ('todo');
 
-    const checkBox = document.createElement('input')
-        checkBox.type = ('checkbox')
+    const checkBox = document.createElement('input');
+        checkBox.type = ('checkbox');
+        checkBox.checked = todo.done;
 
     const writeTask = document.createElement('p')
-        writeTask.innerHTML = txt
+        writeTask.innerText = todo.txt
         writeTask.className = ('a-faire')
 
     const closedTask = document.createElement('button')
@@ -34,20 +56,43 @@ function toDo (txt) {
                 toDoTask.remove();
             }  
         })
+
+        checkBox.addEventListener('change', updateTodoState.bind({},todo));
 }
 
-const tacheAFaire = document.querySelector('input')
-const ajouterTask = document.querySelector('input + input')
+function updateTodoState(todo) {
+    todo.done = !todo.done;
+    localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
+}
+
+function updateTodos(todo, el) {
+    if (todo.done || confirm("Veux-tu vraiment supprimer la tâche ?"))  {
+        todos.splice(todos.indexOf(todo), 1);
+        localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
+        el.remove();
+    }
+}
+
+
+const tacheAFaire = document.getElementById("tache")
+const ajouterTask = document.getElementById("ajouterButton")
 
 ajouterTask.addEventListener('click', function () {
     const maTache = tacheAFaire.value;
-    if (maTache.length > 4 ) {
+    if (maTache.length >= 4 ) {
         toDo(maTache);
         tacheAFaire.value = "";
         tacheAFaire.focus();
     }
 })
 
+document.getElementById("tache")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("ajouterButton").click();
+    }
+});
 
 
 
